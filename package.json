@@ -1,6 +1,6 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "ElectronReact",
+  "name": "paper-chat-app",
+  "productName": "Paper Chat",
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Fast Refresh for rapid application development",
   "scripts": {
     "build": "concurrently \"yarn build:main\" \"yarn build:renderer\"",
@@ -30,8 +30,8 @@
     ]
   },
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.erb.ElectronReact",
+    "productName": "Paper Chat",
+    "appId": "com.github.paper-chat.PaperChat",
     "files": [
       "dist/",
       "node_modules/",
@@ -72,7 +72,10 @@
     },
     "linux": {
       "target": [
-        "AppImage"
+        "AppImage",
+        "pacman",
+        "deb",
+        "rpm"
       ],
       "category": "Development"
     },
@@ -86,13 +89,13 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate"
+      "owner": "paper-chat",
+      "repo": "app"
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron-react-boilerplate/electron-react-boilerplate.git"
+    "url": "git+https://github.com/paper-chat/app.git"
   },
   "author": {
     "name": "Electron React Boilerplate Maintainers",
