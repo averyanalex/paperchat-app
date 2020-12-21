@@ -31,6 +31,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          apt install bsdtar
           yarn postinstall && yarn build && yarn electron-builder --publish always --linux
       - name: Publish Releases for Windows
         if: startsWith(matrix.os,'windows')
