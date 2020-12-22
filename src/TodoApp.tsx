@@ -2,30 +2,31 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoList from './TodoList';
 
+// help
 class TodoApp extends React.Component {
-  constructor(props) {
+  constructor(props: { name: string } | Readonly<{ name: string }>) {
     super(props);
     this.state = { items: [], text: '' };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e) {
+  handleChange(e: { target: { value: any } }) {
     this.setState({ text: e.target.value });
   }
 
-  handleSubmit(e) {
+  handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
     if (this.state.text.length === 0) {
       return;
     }
     const newItem = {
       text: this.state.text,
-      id: Date.now()
+      id: Date.now(),
     };
-    this.setState(state => ({
+    this.setState((state) => ({
       items: state.items.concat(newItem),
-      text: ''
+      text: '',
     }));
   }
 
@@ -35,26 +36,19 @@ class TodoApp extends React.Component {
         <h3>Список дел</h3>
         <TodoList items={this.state.items} />
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="new-todo">
-            Что нужно сделать?
-          </label>
+          <label htmlFor="new-todo">Что нужно сделать?</label>
           <input
             id="new-todo"
             onChange={this.handleChange}
             value={this.state.text}
           />
-          <button>
-            Добавить #{this.state.items.length + 1}
-          </button>
+          <button>Добавить #{this.state.items.length + 1}</button>
         </form>
       </div>
     );
   }
 }
 
-ReactDOM.render(
-  <TodoApp />,
-  document.getElementById('root')
-);
+ReactDOM.render(<TodoApp />, document.getElementById('root'));
 
 export default TodoApp;

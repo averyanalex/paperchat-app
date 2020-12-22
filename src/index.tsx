@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-import TodoApp from './TodoApp';
+import Register from './Register';
+import MessageBox from './MessageBox';
 import './TodoApp.global.css';
 
-render(<TodoApp />, document.getElementById('root'));
+render(<MessageBox />, document.getElementById('root'));
