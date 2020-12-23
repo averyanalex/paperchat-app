@@ -4,7 +4,7 @@ import Message from './Message';
 class MessageBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { pas1: '', messages: [], isFetching: true };
+    this.state = { message: '', messages: [], isFetching: true };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
