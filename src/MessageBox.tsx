@@ -8,6 +8,7 @@ class MessageBox extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   // this.handleChange = this.handleChange.bind(this);
   // this.handleSubmit = this.handleSubmit.bind(this);
   tick() {
@@ -18,17 +19,16 @@ class MessageBox extends React.Component {
       .then((data) => {
         const localMessages = [];
         data.forEach((element) => {
-          localMessages.push(<Message text={element.content} ip={element.ip}/>);
+          localMessages.push(
+            <Message text={element.content} ip={element.ip} />
+          );
         });
         this.setState({ messages: localMessages, isFetching: false });
       });
   }
 
   componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
+    this.timerID = setInterval(() => this.tick(), 1000);
   }
 
   handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -38,14 +38,14 @@ class MessageBox extends React.Component {
   handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (this.state.message.length > 75) {
-      alert("Сообщение длинное очень")
+      alert('Сообщение длинное очень');
       return;
     }
     if (this.state.message.length === 0) {
       return;
     }
-    var url = new URL("http://synthworld.ru:8090/send/msg")
-    url.searchParams.append("content", this.state.message)
+    const url = new URL('http://synthworld.ru:8090/send/msg');
+    url.searchParams.append('content', this.state.message);
     this.setState({ message: '' });
     fetch(url);
   }
@@ -56,20 +56,21 @@ class MessageBox extends React.Component {
       return <div>Загрузка...</div>;
     }
     return (
-    <div>
-      <div className="message-box">{this.state.messages}</div>
-      <form onSubmit={this.handleSubmit}>
-            <label>
-              Сообщение
-              <input
-                id="message"
-                onChange={this.handleChange}
-                value={this.state.message}
-             />
-            </label>
-            <input type="submit" value="Отправить" />
-      </form>
-    </div>);
+      <div>
+        <div className="message-box">{this.state.messages}</div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Сообщение
+            <input
+              id="message"
+              onChange={this.handleChange}
+              value={this.state.message}
+            />
+          </label>
+          <input type="submit" value="Отправить" />
+        </form>
+      </div>
+    );
   }
 }
 
