@@ -41,6 +41,9 @@ class MessageBox extends React.Component {
       alert("Сообщение длинное очень")
       return;
     }
+    if (this.state.message.length === 0) {
+      return;
+    }
     var url = new URL("http://synthworld.ru:8090/send/msg")
     url.searchParams.append("content", this.state.message)
     this.setState({ message: '' });
