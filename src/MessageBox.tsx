@@ -37,7 +37,7 @@ class MessageBox extends React.Component {
 
   handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (this.state.message.length > 30) {
+    if (this.state.message.length > 75) {
       alert("Сообщение длинное очень")
       return;
     }
