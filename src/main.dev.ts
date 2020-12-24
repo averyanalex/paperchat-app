@@ -69,6 +69,7 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
+    backgroundColor: '#36393f',
     width: 1024,
     height: 728,
     icon: getAssetPath('icon.png'),

@@ -8,7 +8,7 @@ class Message extends React.Component {
   render() {
     return (
       <div>
-        {this.props.ip}: {this.props.text}
+        <i>{this.props.time}</i> <b>{this.props.ip}:</b> {this.props.text}
       </div>
     );
   }

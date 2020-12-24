@@ -12,7 +12,7 @@ class MessageBox extends React.Component {
   // this.handleChange = this.handleChange.bind(this);
   // this.handleSubmit = this.handleSubmit.bind(this);
   tick() {
-    fetch('http://synthworld.ru:8090/get?count=20')
+    fetch('http://synthworld.ru:8090/get?count=45')
       .then((response) => {
         return response.json();
       })
@@ -20,7 +20,11 @@ class MessageBox extends React.Component {
         const localMessages = [];
         data.forEach((element) => {
           localMessages.push(
-            <Message text={element.content} ip={element.ip} />
+            <Message
+              text={element.content}
+              ip={element.ip}
+              time={element.time}
+            />
           );
         });
         this.setState({ messages: localMessages, isFetching: false });
@@ -57,7 +61,12 @@ class MessageBox extends React.Component {
     }
     return (
       <div>
-        <div className="message-box">{this.state.messages}</div>
+        <div
+          style={{ overflow: 'auto', height: '80vh' }}
+          className="message-box"
+        >
+          {this.state.messages}
+        </div>
         <form onSubmit={this.handleSubmit}>
           <label>
             Сообщение
