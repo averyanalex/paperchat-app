@@ -5,20 +5,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 
 body {
-  position: relative;
-  color: white;
+  /* position: relative; */
+  color: #ffffff;
   height: 100vh;
-  background: linear-gradient(
-    200.96deg,
-    #fedc2a -29.09%,
-    #dd5789 51.77%,
-    #7a2c9e 129.35%
-  );
+  background: #36393f;
   font-family: 'Noto Sans JP', sans-serif;
   overflow-y: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+input {
+  border: 1px solid #202226;
+  border-radius: 3px;
+  margin: 7px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  background: #303338 !important;
+  outline: none;
+  height: 24px;
+  width: 60vw;
+  color: #eaeaea;
+  font-size: 14px;
+  font-family: Tahoma;
+  padding: 5px 5px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  color: #eaeaea;
+  height: 26px;
+  width: 18vw;
+  background: #7289da !important;
+}
+
+input:focus {
+  /* color: #000000; */
+  border: 1px solid #6e84d1
 }
 
 h2 {
@@ -72,3 +97,4 @@ a:hover {
   align-items: center;
   margin: 20px 0;
 }
+
