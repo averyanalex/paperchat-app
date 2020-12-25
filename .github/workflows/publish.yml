@@ -11,7 +11,7 @@ jobs:
 
 #     strategy:
 #       matrix:
-#         os: [windows-latest, ubuntu-latest]
+#         os: [ubuntu-20.04]
 
     steps:
       - name: Checkout git repo
@@ -25,6 +25,10 @@ jobs:
       - name: Install dependencies
         run: |
           yarn install
+          sudo dpkg --add-architecture i386
+          wget -O - https://dl.winehq.org/wine-builds/winehq.key | sudo apt-key add -
+          sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main'
+          sudo apt update && sudo apt install --install-recommends winehq-stable
 
       - name: Publish Releases
 #         if: startsWith(matrix.os,'ubuntu')
