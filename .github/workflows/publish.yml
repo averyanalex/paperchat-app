@@ -7,11 +7,11 @@ on:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest # ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
-#     strategy:
-#       matrix:
-#         os: [ubuntu-20.04]
+    strategy:
+      matrix:
+        os: [ubuntu-20.04]
 
     steps:
       - name: Checkout git repo
@@ -25,10 +25,6 @@ jobs:
       - name: Install dependencies
         run: |
           yarn install
-          sudo dpkg --add-architecture i386
-          wget -O - https://dl.winehq.org/wine-builds/winehq.key | sudo apt-key add -
-          sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main'
-          sudo apt update && sudo apt install --install-recommends winehq-stable
 
       - name: Publish Releases
 #         if: startsWith(matrix.os,'ubuntu')
@@ -36,9 +32,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn postinstall && yarn build && yarn electron-builder --publish always --linux --win
-#       - name: Publish Releases for Windows
+#       - name: Publish Releases
 #         if: startsWith(matrix.os,'windows')
 #         env:
 #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #         run: |
-#           yarn postinstall && yarn build && yarn electron-builder --publish always --win
+#           yarn postinstall && yarn build && yarn electron-builder --publish always --win --linux
