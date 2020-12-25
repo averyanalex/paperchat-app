@@ -4,7 +4,7 @@ import Message from './Message';
 class MessageBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { message: '', messages: [], isFetching: true };
+    this.state = { message: '', messages: [], isFetching: true, selectedFile: null };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -45,14 +45,32 @@ class MessageBox extends React.Component {
       alert('Сообщение длинное очень');
       return;
     }
-    if (this.state.message.length === 0) {
+    if (this.state.message.length === 0 && !this.state.selectedFile === null) {
       return;
     }
-    const url = new URL('http://synthworld.ru:8090/send/msg');
-    url.searchParams.append('content', this.state.message);
+    const url = 'http://synthworld.ru:8090/send/msg';
+
+    let formData = new FormData();
+    formData.append("message", this.state.message)
+    formData.append(
+      "file",
+      this.state.selectedFile,
+      this.state.selectedFile.name
+    )
     this.setState({ message: '' });
-    fetch(url);
+    fetch(url,
+    {
+      body: formData,
+      method: "post"
+    })
   }
+
+  onFileChange = event => {
+
+    // Update the state
+    this.setState({ selectedFile: event.target.files[0] });
+
+  };
 
   render() {
     const { data, isFetching } = this.state;
@@ -67,7 +85,7 @@ class MessageBox extends React.Component {
         >
           {this.state.messages}
         </div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} >
           <label>
             Сообщение
             <input
@@ -77,6 +95,7 @@ class MessageBox extends React.Component {
             />
           </label>
           <input type="submit" value="Отправить" />
+          <input type="file" onChange={this.onFileChange}/>
         </form>
       </div>
     );
