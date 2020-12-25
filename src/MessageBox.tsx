@@ -45,18 +45,13 @@ class MessageBox extends React.Component {
       alert('Сообщение длинное очень');
       return;
     }
-    if (this.state.message.length === 0 && !this.state.selectedFile === null) {
+    if (this.state.message.length === 0 && this.state.selectedFile !== null) {
       return;
     }
     const url = 'http://synthworld.ru:8090/send/msg';
 
     let formData = new FormData();
-    formData.append("message", this.state.message)
-    formData.append(
-      "file",
-      this.state.selectedFile,
-      this.state.selectedFile.name
-    )
+    formData.append("message", this.state.message, this.state.selectedFile)
     this.setState({ message: '' });
     fetch(url,
     {
