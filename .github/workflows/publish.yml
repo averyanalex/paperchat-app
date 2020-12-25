@@ -27,7 +27,7 @@ jobs:
           yarn install
 
       - name: Publish Releases for Linux
-          if: startsWith(matrix.os,'ubuntu')
+        if: startsWith(matrix.os,'ubuntu')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
