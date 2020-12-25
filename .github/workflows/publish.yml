@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [windows-latest, ubuntu-20.04]
 
     steps:
       - name: Checkout git repo
@@ -26,15 +26,15 @@ jobs:
         run: |
           yarn install
 
-      - name: Publish Releases
-#         if: startsWith(matrix.os,'ubuntu')
+      - name: Publish Releases for Linux
+          if: startsWith(matrix.os,'ubuntu')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          yarn postinstall && yarn build && yarn electron-builder --publish always --linux --win
-#       - name: Publish Releases
-#         if: startsWith(matrix.os,'windows')
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         run: |
-#           yarn postinstall && yarn build && yarn electron-builder --publish always --win --linux
+          yarn postinstall && yarn build && yarn electron-builder --publish always --linux
+      - name: Publish Releases for Windows
+        if: startsWith(matrix.os,'windows')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          yarn postinstall && yarn build && yarn electron-builder --publish always --win
